@@ -22,7 +22,7 @@ const titleMap = {
  */
 export const getTitleFromRoute = (path) => {
   if (titleMap[path]) {
-    return `${titleMap[path]} | SocialEcho`;
+    return `${titleMap[path]} | SphereEngage`;
   }
 
   const userProfileRegex = /^\/user\/(\w+)$/;
@@ -31,12 +31,12 @@ export const getTitleFromRoute = (path) => {
     /^\/community\/(\w+)(\/report|\/reported-post|\/moderator)?$/;
 
   if (userProfileRegex.test(path)) {
-    return "User Profile | SocialEcho";
+    return "User Profile | SphereEngage";
   } else if (postRegex.test(path)) {
-    return "Post | SocialEcho";
+    return "Post | SphereEngage";
   } else if (communityRegex.test(path)) {
-    return "Community | SocialEcho";
+    return "Community | SphereEngage";
   }
 
-  return "SocialEcho";
+  return "SphereEngage";
 };

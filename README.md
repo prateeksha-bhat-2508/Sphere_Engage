@@ -1,182 +1,341 @@
-# SocialEcho
+# Sphere Engage
 
-A social networking platform with automated content moderation and context-based authentication system.
+A social networking platform analyzed, deployed, documented, and extended as part of a software engineering and database systems study.
 
-[Watch Demo](https://youtu.be/Tmncayg7FeU)
+---
 
-![UI-community](https://raw.githubusercontent.com/nz-m/SocialEcho/main/resources/UI-community.png)
+## Project Background
 
-## Table of Contents
+**Sphere Engage** is based on the open-source **SphereEngage** project and was studied as part of an academic analysis of large-scale MERN applications.
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies](#technologies)
-- [Schema Diagram](#schema-diagram)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [License](#license)
+The purpose of this repository is not to claim authorship of the original implementation, but to document and analyze the architecture, database design, authentication mechanisms, deployment workflow, and containerization aspects of the system.
 
-## Project Overview
+### Acknowledgement
 
-The project is a social networking platform built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It incorporates two major features: an automated content moderation system and context-based authentication. These features are accompanied by common functionalities found in social media applications, such as profile creation, post creation and sharing, liking and commenting on posts, and following/unfollowing users.
+This project was developed by referring to the open-source SphereEngage project:
+The repository was used for educational and analytical purposes including system study, architecture evaluation, deployment analysis, database modeling, authentication workflow analysis, and feature experimentation.
 
-### Automated Content Moderation
+---
 
-The platform's automated content moderation system utilizes various NLP (Natural Language Processing) APIs. These APIs include:
-
-- Perspective API: Used for filtering spam, profanity, toxicity, harassment etc.
-- TextRazor API: Integrated for content categorization.
-- Hugging Face Interface API: Utilized with BART Large MNLI for content categorization.
-
-A Flask application has been developed to provide similar functionality as the Hugging Face Interface API's classifier. The Flask app utilizes the BART Large MNLI model. It operates as a zero-shot classification pipeline with a PyTorch framework.
-
-The system allows flexibility in choosing different services for API usage or disabling them without affecting overall functionality by using a common interface for interacting with the APIs.
-
-When a user posts content, it undergoes a thorough filtering process to ensure compliance with the community guidelines. Additionally, users have the ability to report posts that they find inappropriate, which triggers a manual review process.
-
-### Context-Based Authentication
-
-The platform implements context-based authentication to enhance user account security. It takes into consideration user location, IP address, and device information for authentication purposes. Users can conveniently manage their devices directly from the platform. To ensure data privacy, this information is encrypted using the AES algorithm and securely stored in the database.
-
-In case of a suspicious login attempt, users are promptly notified via email and are required to confirm their identity to protect against unauthorized access.
-
-### User Roles
-
-There are three distinct user roles within the system:
-
-1. Admin: The admin role manages the overall system, including moderator management, community management, content moderation, monitoring user activity, and more.
-2. Moderators: Moderators manage communities, manually review reported posts, and perform other moderation-related tasks.
-3. General Users: General users have the ability to make posts, like comments, and perform other actions within the platform.
+## Objectives of the Study
 
 
+* MERN Stack Architecture
+* Authentication and Authorization using JWT
+* Refresh Token Mechanisms
+* Database Design and Relationships
+* Community-Based Social Network Architecture
+* Content Moderation Pipelines
+* State Management using Redux
+* REST API Design
+* Context-Based Authentication
+* Deployment and Environment Configuration
+* Docker and Containerization Concepts
+* Software Maintenance and Debugging
+
+---
+
+## Key Areas of Contribution
+
+The study and modifications focused on:
+
+### Database Architecture
+
+* User Schema Analysis
+* Community Schema Analysis
+* Post and Comment Relationships
+* Report and Moderation Workflows
+* Authentication Data Modeling
+* Entity Relationship Mapping
+
+### Authentication Study
+
+* JWT Authentication
+* Refresh Token Workflow
+* Context-Based Authentication
+* Device-Based Verification
+* Session Management
+* Security Analysis
+
+### Deployment and Configuration
+
+* Local MERN Deployment
+* MongoDB Configuration
+* Environment Variable Management
+* Dependency Resolution
+* Runtime Debugging
+
+### Containerization Analysis
+
+* Docker-Based Deployment Study
+* Multi-Service Application Architecture
+* Container Networking Concepts
+* Environment Isolation
+* Service Dependency Management
+
+### Software Maintenance
+
+* Dependency Conflict Resolution
+* Redux Store Initialization Debugging
+* Authentication Workflow Fixes
+* Environment Configuration Fixes
+* Build and Deployment Testing
+
+---
+
+## System Architecture
+
+```text
+┌─────────────────────────────┐
+│         React Client        │
+│  React + Redux + Tailwind   │
+└──────────────┬──────────────┘
+               │
+               ▼
+┌─────────────────────────────┐
+│      Express.js Server      │
+│     REST API Endpoints      │
+└──────────────┬──────────────┘
+               │
+      ┌────────┴────────┐
+      ▼                 ▼
+┌─────────────┐   ┌─────────────┐
+│  MongoDB    │   │ Auth Layer  │
+│  Database   │   │ JWT Tokens  │
+└─────────────┘   └─────────────┘
+      │
+      ▼
+┌─────────────────────────────┐
+│ Content Moderation Services │
+│ Perspective / TextRazor /   │
+│ HuggingFace / Flask Model   │
+└─────────────────────────────┘
+```
+
+---
 
 ## Features
 
-- [x] User authentication and authorization (JWT)
-- [x] User profile creation and management
-- [x] Post creation and management
-- [x] Commenting on posts
-- [x] Liking posts and comments
-- [x] Following/unfollowing users
-- [x] Reporting posts
-- [x] Content moderation
-- [x] Context-based authentication
-- [x] Device management
-- [x] Admin dashboard
-- [x] Moderator dashboard
-- [x] Email notifications
+### User Features
 
+* User Registration
+* Login and Authentication
+* Profile Management
+* Follow / Unfollow Users
+* Community Participation
+* Post Creation
+* Commenting System
+* Like System
 
-## Technologies
+### Moderation Features
 
-- React.js
-- Redux
-- Node.js
-- Express.js
-- MongoDB
-- Tailwind CSS
-- JWT Authentication
-- Passport.js
-- Nodemailer
-- Crypto-js
-- Azure Blob Storage
-- Flask
-- Hugging Face Transformers
+* Post Reporting
+* Manual Moderation
+* Community Moderation
+* Automated Content Filtering
 
+### Administrative Features
 
-## Schema Diagram
+* Admin Dashboard
+* Moderator Management
+* Community Management
+* User Monitoring
 
-![Schema Diagram](https://raw.githubusercontent.com/nz-m/SocialEcho/main/resources/Schema-Diagram.png)
+### Security Features
 
+* JWT Authentication
+* Refresh Token Management
+* Device Management
+* Context-Based Authentication
+* Email Notifications
 
+---
 
-## Getting Started
+## Technology Stack
 
-### Prerequisites
+### Frontend
 
-Before running the application, make sure you have the following installed:
+* React.js
+* Redux Toolkit
+* React Router
+* Tailwind CSS
+* Axios
 
-- Node.js
-- MongoDB or MongoDB Atlas account
+### Backend
 
-### Installation
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
 
-1. Clone the repository
+### Authentication
+
+* JWT
+* Passport.js
+
+### Communication
+
+* Nodemailer
+
+### Moderation Services
+
+* Perspective API
+* TextRazor
+* HuggingFace BART Large MNLI
+* Flask Classifier Service
+
+### Deployment & Infrastructure
+
+* Docker
+* MongoDB
+* Environment Configuration
+
+---
+
+## Database Schema
+
+The original database schema used in the reference implementation is preserved for architectural analysis.
+
+![Database Schema](resources/Schema-Diagram.png)
+
+---
+
+## Project Structure
+
+```text
+Sphere_Engage
+│
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── redux/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── middleware/
+│   │   └── utils/
+│   │
+│   └── package.json
+│
+├── server/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── utils/
+│   └── package.json
+│
+├── classifier_server/
+│   ├── app.py
+│   ├── models/
+│   └── requirements.txt
+│
+├── resources/
+│   └── Schema-Diagram.png
+│
+├── docker/
+│
+├── README.md
+└── .env
+```
+
+---
+
+## Installation
+
+### Clone Repository
 
 ```bash
-git clone https://github.com/nz-m/SocialEcho.git
+git clone https://github.com/prateeksha-bhat-2508/Sphere_Engage.git
+cd Sphere_Engage
 ```
-2. Go to the project directory and install dependencies for both the client and server
+
+### Install Dependencies
+
+Client
 
 ```bash
 cd client
 npm install
 ```
 
+Server
+
 ```bash
 cd server
 npm install
 ```
 
-3. Create a `.env` file in both the `client` and `server` directories and add the environment variables as shown in the `.env.example` files.
-4. Start the server
+### Environment Configuration
+
+Create a `.env` file inside the server directory.
+
+Example:
+
+```env
+CLIENT_URL=http://localhost:3000
+MONGODB_URI=mongodb://127.0.0.1:27017/db_socialecho
+
+PORT=4000
+
+SECRET=your_secret
+REFRESH_SECRET=your_refresh_secret
+
+CRYPTO_KEY=your_crypto_key
+```
+
+### Start Backend
 
 ```bash
 cd server
 npm start
 ```
 
-5. Start the client
+### Start Frontend
 
 ```bash
 cd client
 npm start
 ```
 
+---
 
-### Configuration
+## Docker and Containerization Study
 
-Run the `admin_tool.sh` script from the server directory with permissions for executing the script. This script is used for configuring the admin account, creating the initial communities, and other settings.
-```bash
-./admin_tool.sh
-``` 
+This project was also used to study containerization concepts, including:
 
-#### `.env` Variables
+* Application Isolation
+* Environment Consistency
+* Service Dependency Management
+* Backend and Database Separation
+* Multi-Service Architecture
+* Docker-Based Deployment Workflows
 
-For email service of context-based authentication, the following variables are required:
+The containerization study focused on understanding how large-scale web applications can be packaged, deployed, and managed consistently across environments.
 
-```bash
-EMAIL=
-PASSWORD=
-EMAIL_SERVICE=
-```
+---
 
-For content moderation, you need the `PERSPECTIVE_API_KEY` and either the `INTERFACE_API_KEY` or `TEXTRAZOR_API_KEY`. Visit the following links to obtain the API keys:
+## Educational Purpose
 
-- [Perspective API](https://developers.perspectiveapi.com/s/docs-get-started)
-- [TextRazor API](https://www.textrazor.com/)
-- [Hugging Face Interface API](https://huggingface.co/facebook/bart-large-mnli)
+This repository is maintained for educational and analytical purposes.
 
-If you prefer, the Flask server can be run locally as an alternative to using the Hugging Face Interface API or TextRazor API. Refer to the `classifier_server` directory for more information.
+Primary areas of study include:
 
+* Database Architecture
+* Authentication Systems
+* MERN Application Design
+* Content Moderation Architecture
+* Containerization Concepts
+* Deployment Strategies
+* Software Maintenance and Debugging
 
->**Note:** Configuration for context-based authentication and content moderation features are **_not mandatory_** to run the application. However, these features will not be available if the configuration is not provided.
-
-
-## Usage
-
-### Admin
-
-The admin dashboard can be accessed at the `/admin` route. Use the `admin_tool.sh` script to configure the admin account. The admin account can be used to manage moderators, communities, and perform other admin-related tasks. You can also enable/disable or switch API services using the admin dashboard.
-
-### Moderator
-
-Moderators have specific email domain (`@mod.socialecho.com`). When registering with an email from this domain, the user is automatically assigned the moderator role. Moderators can be assigned to different communities from the admin dashboard.
-
-#### Demo
-https://youtu.be/Tmncayg7FeU
+---
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/nz-m/SocialEcho/blob/main/LICENSE).
+The original reference implementation is licensed under the MIT License.
+## System Architecture
+
 

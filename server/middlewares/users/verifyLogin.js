@@ -41,7 +41,7 @@ const sendLoginVerificationEmail = async (req, res) => {
     });
 
     let info = await transporter.sendMail({
-      from: `"SocialEcho" <${USER}>`,
+      from: `"SphereEngage" <${USER}>`,
       to: email,
       subject: "Action Required: Verify Recent Login",
       html: verifyLoginHTML(
